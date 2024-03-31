@@ -2,122 +2,21 @@ import { useEffect, useState, ReactNode, FC } from "react";
 import {
   UiComponents,
   UiFrameworks,
-  antDesignSupportedComponents,
-  chakraUiSupportedComponents,
+  supportedComponents,
   frameworkDetails,
-  materialUiSupportedComponents,
-  nextUiSupportedComponents,
-  radixUiSupportedComponents,
-  shadcnUiSupportedComponents,
+  UiComponentsDescription,
 } from "../lib/data";
 import Head from "next/head";
-
-interface TableProps {
-  children: ReactNode;
-  className?: string;
-}
-
-interface TableHeadProps {
-  isSticky: boolean;
-  children: ReactNode;
-}
-
-interface TableRowProps {
-  children: ReactNode;
-}
-
-interface TableHeaderProps {
-  children: ReactNode;
-}
-
-interface TableBodyProps {
-  children: ReactNode;
-}
-
-interface TableCellProps {
-  children: ReactNode;
-}
-
-const Table: FC<TableProps> = ({ children, className = "" }) => (
-  <table className={`min-w-full divide-y divide-gray-200 ${className}`}>
-    {children}
-  </table>
-);
-
-const TableHead: FC<TableHeadProps> = ({ isSticky, children }) => (
-  <thead
-    className={`${
-      isSticky ? "sticky top-0 z-10 bg-white" : ""
-    } text-xs font-medium uppercase tracking-wider text-gray-700`}
-  >
-    {children}
-  </thead>
-);
-
-const TableRow: FC<TableRowProps> = ({ children }) => <tr>{children}</tr>;
-
-const TableHeader: FC<TableHeaderProps> = ({ children }) => (
-  <th className="px-6 py-3 text-left">{children}</th>
-);
-
-const TableBody: FC<TableBodyProps> = ({ children }) => (
-  <tbody className="bg-white divide-y divide-gray-200">{children}</tbody>
-);
-
-const TableCell: FC<TableCellProps> = ({ children }) => (
-  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-    {children}
-  </td>
-);
-
-const colorPalette = {
-  orange: "#FF6700",
-  lightGray: "#EBEBEB",
-  gray: "#C0C0C0",
-  lightBlue: "#3A6EA5",
-  darkBlue: "#004E98",
-  green: "#16A173",
-};
-
-const FrameworkDetailCard = ({
-  name,
-  details,
-}: {
-  name: string;
-  details: {
-    configurationMethods: string;
-    specialInstallationRequirements: string;
-    license: string;
-    pricing: string;
-    RTLsupport: string;
-  };
-}) => (
-  <div
-    className="mb-4 p-4 rounded-lg shadow-lg"
-    style={{
-      backgroundColor: colorPalette.lightBlue,
-      color: colorPalette.orange,
-    }}
-  >
-    <h3 className="text-lg font-semibold">{name}</h3>
-    <p>
-      <strong>Configuration Methods:</strong> {details.configurationMethods}
-    </p>
-    <p>
-      <strong>Special Installation Requirements:</strong>{" "}
-      {details.specialInstallationRequirements}
-    </p>
-    <p>
-      <strong>License:</strong> {details.license}
-    </p>
-    <p>
-      <strong>Pricing:</strong> {details.pricing}
-    </p>
-    <p>
-      <strong>RTL Support:</strong> {details.RTLsupport}
-    </p>
-  </div>
-);
+import { FrameworkDetailCard } from "whichui/components/FrameworkDetailCard";
+import { GitHubStatsComponent } from "whichui/components/GithubStats";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableHeader,
+  TableBody,
+  TableCell,
+} from "whichui/components/Table";
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
@@ -141,23 +40,81 @@ export default function Home() {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         />
+        <link
+          rel="icon"
+          href="/favicon.svg"
+          type="image/svg+xml"
+        />
+        <title>Which UI Framework Should You Use?</title>
+        <meta
+          name="description"
+          content="Compare different UI frameworks to find the best one for your project."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          property="og:title"
+          content="Which UI Framework Should You Use?"
+        />
+        <meta
+          property="og:description"
+          content="Compare different UI frameworks to find the best one for your project."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/screenshot.png" />
+        <meta property="og:url" content="https://whichui.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Which UI Framework Should You Use?"
+        />
+        <meta
+          name="twitter:description"
+          content="Compare different UI frameworks to find the best one for your project."
+        />
+        <meta name="twitter:image" content="/screenshot.png" />
       </Head>
-      <main
-        className="p-4 md:p-12 min-h-screen"
-        style={{
-          color: colorPalette.darkBlue,
-          backgroundColor: colorPalette.lightGray,
-        }}
-      >
+      <main className="p-4 md:p-8 md:py-4 min-h-screen text-blue-900 bg-gray-200">
+        <section className="text-center py-12 mb-12 bg-gray-200">
+          <h1 className="text-2xl md:text-3xl font-bold mb-4 text-blue-900">
+            Which UI Framework Should You Use?
+          </h1>
+          <p className="text-md md:text-md mx-auto mb-12 text-blue-900">
+            Selecting the right UI framework can be a daunting task. This
+            comparison chart will help you make an informed decision.
+          </p>
+
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {UiFrameworks.map((framework) => (
+              <div key={framework} className="flex flex-col items-center">
+                <img
+                  src={frameworkDetails[framework].logo}
+                  alt={framework}
+                  className="h-20 w-20 object-contain"
+                />
+                <span className="mt-2 text-sm font-semibold text-blue-900">
+                  {framework}
+
+                  <GitHubStatsComponent
+                    framework={framework}
+                    repoUrl={frameworkDetails[framework].github}
+                  />
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
         <div className="overflow-x-auto">
+          <p className="text-lg font-semibold mb-4 text-blue-900">
+            Component Support Comparison
+          </p>
           <Table className="w-full">
             <TableHead isSticky={isSticky}>
               <TableRow>
                 <TableHeader>Component</TableHeader>
                 {UiFrameworks.map((framework) => {
-                  const supportedComponents = Object.keys(frameworkDetails[framework]).length;
-                  const totalComponents = UiComponents.length;
-                  const supportedComponentsCount = `${supportedComponents}/${totalComponents}`;
+                  const supportedComponentsCount = `${
+                    Object.keys(supportedComponents[framework]).length
+                  }/${Object.keys(UiComponents).length}`;
                   return (
                     <TableHeader key={framework}>
                       {frameworkDetails?.[framework]?.logo && (
@@ -176,30 +133,32 @@ export default function Home() {
             <TableBody>
               {UiComponents.map((component) => (
                 <TableRow key={component}>
-                  <TableCell>{component}</TableCell>
+                  <TableCell>
+                    {component}
+                    {UiComponentsDescription[component] && (
+                      <div className="text-xs text-gray-500 max-w-64 text-wrap">
+                        {UiComponentsDescription[component]}
+                      </div>
+                    )}
+                  </TableCell>
                   {UiFrameworks.map((framework) => (
                     <TableCell key={framework}>
-                      {nextUiSupportedComponents[component] &&
-                      framework === "NextUI" ? (
-                        <i className="fas fa-check text-green-500"></i>
-                      ) : radixUiSupportedComponents[component] &&
-                        framework === "RadixUI" ? (
-                        <i className="fas fa-check text-green-500"></i>
-                      ) : shadcnUiSupportedComponents[component] &&
-                        framework === "ShadcnUI" ? (
-                        <i className="fas fa-check text-green-500"></i>
-                      ) : materialUiSupportedComponents[component] &&
-                        framework === "MaterialUI" ? (
-                        <i className="fas fa-check text-green-500"></i>
-                      ) : chakraUiSupportedComponents[component] &&
-                        framework === "ChakraUI" ? (
-                        <i className="fas fa-check text-green-500"></i>
-                      ) : antDesignSupportedComponents[component] &&
-                        framework === "AntDesign" ? (
-                        <i className="fas fa-check text-green-500"></i>
-                      ) : (
-                        <i className="fas fa-times text-red-500"></i>
-                      )}
+                      <div
+                        className={`w-full h-full absolute top-0 left-0 z-10 ${
+                          supportedComponents[framework] &&
+                          supportedComponents[framework][component]
+                            ? "bg-green-500"
+                            : "bg-orange-500"
+                        } opacity-50`}
+                      ></div>
+                      <span className="relative z-20">
+                        {supportedComponents[framework] &&
+                        supportedComponents[framework][component] ? (
+                          <i className="fas fa-check"></i>
+                        ) : (
+                          <i className="fas fa-times"></i>
+                        )}
+                      </span>
                     </TableCell>
                   ))}
                 </TableRow>
@@ -215,6 +174,9 @@ export default function Home() {
           ))}
         </div>
         <div className="hidden md:block overflow-x-auto">
+          <p className="text-lg font-semibold mb-4 text-blue-900">
+            Detailed Framework Information
+          </p>
           <Table className="w-full">
             <TableHead isSticky={isSticky}>
               <TableRow>
@@ -224,12 +186,24 @@ export default function Home() {
                 <TableHeader>License</TableHeader>
                 <TableHeader>Pricing</TableHeader>
                 <TableHeader>RTL Support</TableHeader>
+                <TableHeader>Github</TableHeader>
+                <TableHeader>Website</TableHeader>
+                <TableHeader>Docs</TableHeader>
               </TableRow>
             </TableHead>
             <TableBody>
               {Object.entries(frameworkDetails).map(([name, details]) => (
                 <TableRow key={name}>
-                  <TableCell>{name}</TableCell>
+                  <TableCell>
+                    <div className="flex items-center">
+                      <img
+                        src={details.logo}
+                        alt={name}
+                        className="h-6 w-6 mr-2"
+                      />
+                      {name}
+                    </div>
+                  </TableCell>
                   <TableCell>{details.configurationMethods}</TableCell>
                   <TableCell>
                     {details.specialInstallationRequirements}
@@ -237,6 +211,21 @@ export default function Home() {
                   <TableCell>{details.license}</TableCell>
                   <TableCell>{details.pricing}</TableCell>
                   <TableCell>{details.RTLsupport}</TableCell>
+                  <TableCell>
+                    <a href={details.github} className="text-green-500">
+                      {details.github}
+                    </a>
+                  </TableCell>
+                  <TableCell>
+                    <a href={details.website} className="text-green-500">
+                      {details.website}
+                    </a>
+                  </TableCell>
+                  <TableCell>
+                    <a href={details.docs} className="text-green-500">
+                      {details.docs}
+                    </a>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
