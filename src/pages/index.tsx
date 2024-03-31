@@ -17,11 +17,28 @@ import {
   TableBody,
   TableCell,
 } from "whichui/components/Table";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics, isSupported } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
 
 export default function Home() {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
     const handleScroll = () => {
       setIsSticky(window.scrollY > 0);
     };
@@ -40,11 +57,7 @@ export default function Home() {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         />
-        <link
-          rel="icon"
-          href="/favicon.svg"
-          type="image/svg+xml"
-        />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <title>Which UI Framework Should You Use?</title>
         <meta
           name="description"
