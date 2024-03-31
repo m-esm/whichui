@@ -73,9 +73,9 @@ export default function Home() {
           content="Compare different UI frameworks to find the best one for your project."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/screenshot.png" />
+        <meta property="og:image" content="https://whichui.com/favicon.svg" />
         <meta property="og:url" content="https://whichui.com" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="https://whichui.com/screenshot.png" />
         <meta
           name="twitter:title"
           content="Which UI Framework Should You Use?"
@@ -84,7 +84,7 @@ export default function Home() {
           name="twitter:description"
           content="Compare different UI frameworks to find the best one for your project."
         />
-        <meta name="twitter:image" content="/screenshot.png" />
+        <meta name="twitter:image" content="https://whichui.com/screenshot.png" />
       </Head>
       <main className="p-4 md:p-8 md:py-4 min-h-screen text-blue-900 bg-gray-200">
         <section className="text-center py-12 mb-12 bg-gray-200">
