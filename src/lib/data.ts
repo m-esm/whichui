@@ -54,8 +54,8 @@ export const frameworkDetails: {
     pricing: "Free",
     RTLsupport: "Unknown",
     github: "https://github.com/shadcn-ui/ui",
-    website: "https://shadcn-ui.com",
-    docs: "https://shadcn-ui.com/docs",
+    website: "https://ui.shadcn.com",
+    docs: "https://ui.shadcn.com/docs",
   },
   MaterialUI: {
     logo: "/logos/mui.svg",
