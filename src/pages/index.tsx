@@ -58,7 +58,7 @@ export default function Home() {
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <title>Which UI Framework Should You Use?</title>
+        <title>Which UI Framework Should You Use For React?</title>
         <meta
           name="description"
           content="Compare different UI frameworks to find the best one for your project."
@@ -89,7 +89,7 @@ export default function Home() {
       <main className="p-4 md:p-8 md:py-4 min-h-screen text-blue-900 bg-gray-200">
         <section className="text-center py-12 mb-12 bg-gray-200">
           <h1 className="text-2xl md:text-3xl font-bold mb-4 text-blue-900">
-            Which UI Framework Should You Use?
+            Which UI Framework Should You Use For React?
           </h1>
           <p className="text-md md:text-md mx-auto mb-12 text-blue-900">
             Selecting the right UI framework can be a daunting task. This
