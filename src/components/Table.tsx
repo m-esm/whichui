@@ -1,4 +1,5 @@
 import { ReactNode, FC } from "react";
+import { cn } from "whichui/lib/utils";
 
 interface TableProps {
   children: ReactNode;
@@ -6,17 +7,23 @@ interface TableProps {
 }
 
 interface TableHeadProps {
-  isSticky: boolean;
   children: ReactNode;
+  className?: string;
 }
 
 interface TableRowProps {
   children: ReactNode;
+  className?: string;
 }
 
-interface TableHeaderProps {
-  children: ReactNode;
-}
+type TableHeaderProps = { children: ReactNode; className?: string } & (
+  | {
+      sticky?: false;
+      // stickyToLeft?: false;
+      // stickyToTop?: false;
+    }
+  | { sticky: true; stickyToTop?: boolean; stickyToLeft?: boolean }
+);
 
 interface TableBodyProps {
   children: ReactNode;
@@ -24,6 +31,7 @@ interface TableBodyProps {
 
 interface TableCellProps {
   children: ReactNode;
+  className?: string;
 }
 
 export const Table: FC<TableProps> = ({ children, className = "" }) => (
@@ -32,32 +40,46 @@ export const Table: FC<TableProps> = ({ children, className = "" }) => (
   </table>
 );
 
-export const TableHead: FC<TableHeadProps> = ({ isSticky, children }) => (
+export const TableHead: FC<TableHeadProps> = ({ children, className }) => (
   <thead
-    className={`${
-      isSticky ? "sticky top-0 z-10 bg-white" : ""
-    } text-xs font-medium uppercase tracking-wider text-gray-700`}
+    className={cn("bg-white text-xs font-medium text-gray-700", className)}
   >
     {children}
   </thead>
 );
 
-export const TableRow: FC<TableRowProps> = ({ children }) => (
-  <tr className="hover:bg-gray-300 transition-colors duration-200 ease-in-out hover:shadow-md">
-    {children}
-  </tr>
+export const TableRow: FC<TableRowProps> = ({ children, className }) => (
+  <tr className={className}>{children}</tr>
 );
 
-export const TableHeader: FC<TableHeaderProps> = ({ children }) => (
-  <th className="px-6 py-3 text-left">{children}</th>
-);
+export const TableHeader: FC<TableHeaderProps> = (props) => {
+  return (
+    <th
+      className={cn("px-6 py-3 text-left bg-white", props.className, {
+        "sticky z-[1] bg-white": props.sticky,
+        "top-0": props.sticky && props.stickyToTop,
+        "left-0": props.sticky && props.stickyToLeft,
+        "z-[2]": props.sticky && props.stickyToTop && props.stickyToLeft,
+      })}
+    >
+      {props.children}
+    </th>
+  );
+};
 
 export const TableBody: FC<TableBodyProps> = ({ children }) => (
-  <tbody className="bg-white divide-y divide-gray-200">{children}</tbody>
+  <tbody className="divide-y divide-gray-200 bg-white [&>tr:hover]:bg-gray-300 [&>tr:hover]:shadow-md [&>tr]:transition-colors [&>tr]:duration-200 [&>tr]:ease-in-out">
+    {children}
+  </tbody>
 );
 
-export const TableCell: FC<TableCellProps> = ({ children }) => (
-  <td className="px-6 py-4 text-sm font-medium text-gray-900 relative">
+export const TableCell: FC<TableCellProps> = ({ children, className }) => (
+  <td
+    className={cn(
+      "relative px-6 py-4 text-sm font-medium text-gray-900",
+      className,
+    )}
+  >
     {children}
   </td>
 );
