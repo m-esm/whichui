@@ -1,25 +1,26 @@
-import { useEffect, useState, ReactNode, FC } from "react";
-import {
-  UiComponents,
-  UiFrameworks,
-  supportedComponents,
-  frameworkDetails,
-  UiComponentsDescription,
-} from "../lib/data";
 import Head from "next/head";
+import { useEffect } from "react";
 import { FrameworkDetailCard } from "whichui/components/FrameworkDetailCard";
 import { GitHubStatsComponent } from "whichui/components/GithubStats";
 import {
   Table,
-  TableHead,
-  TableRow,
-  TableHeader,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "whichui/components/Table";
+import {
+  UiComponents,
+  UiComponentsDescription,
+  UiFrameworks,
+  frameworkDetails,
+  supportedComponents,
+} from "../lib/data";
 // Import the functions you need from the SDKs you need
+import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { getAnalytics, isSupported } from "firebase/analytics";
+import { cn } from "whichui/lib/utils";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -32,22 +33,10 @@ const firebaseConfig = {
 };
 
 export default function Home() {
-  const [isSticky, setIsSticky] = useState(false);
-
   useEffect(() => {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
 
   return (
@@ -75,7 +64,10 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://whichui.com/favicon.svg" />
         <meta property="og:url" content="https://whichui.com" />
-        <meta name="twitter:card" content="https://whichui.com/screenshot.png" />
+        <meta
+          name="twitter:card"
+          content="https://whichui.com/screenshot.png"
+        />
         <meta
           name="twitter:title"
           content="Which UI Framework Should You Use?"
@@ -84,11 +76,14 @@ export default function Home() {
           name="twitter:description"
           content="Compare different UI frameworks to find the best one for your project."
         />
-        <meta name="twitter:image" content="https://whichui.com/screenshot.png" />
+        <meta
+          name="twitter:image"
+          content="https://whichui.com/screenshot.png"
+        />
       </Head>
-      <main className="p-4 md:p-8 md:py-4 min-h-screen text-blue-900 bg-gray-200">
-        <section className="text-center py-12 mb-12 bg-gray-200">
-          <h1 className="text-2xl md:text-3xl font-bold mb-4 text-blue-900">
+      <main className="min-h-screen bg-gray-200 p-4 text-blue-900 md:p-8 md:py-4">
+        <section className="mb-12 bg-gray-200 py-12 text-center">
+          <h1 className="mb-4 text-2xl font-bold text-blue-900 md:text-3xl">
             Which UI Framework Should You Use For React?
           </h1>
           <p className="text-md md:text-md mx-auto mb-12 text-blue-900">
@@ -96,7 +91,7 @@ export default function Home() {
             comparison chart will help you make an informed decision.
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-8">
             {UiFrameworks.map((framework) => (
               <div key={framework} className="flex flex-col items-center">
                 <img
@@ -116,25 +111,27 @@ export default function Home() {
             ))}
           </div>
         </section>
-        <div className="overflow-x-auto">
-          <p className="text-lg font-semibold mb-4 text-blue-900">
-            Component Support Comparison
-          </p>
+        <p className="mb-4 text-lg font-semibold text-blue-900">
+          Component Support Comparison
+        </p>
+        <div className="max-h-[80vh] overflow-x-auto">
           <Table className="w-full">
-            <TableHead isSticky={isSticky}>
+            <TableHead className="uppercase tracking-wider">
               <TableRow>
-                <TableHeader>Component</TableHeader>
+                <TableHeader sticky stickyToLeft stickyToTop>
+                  Component
+                </TableHeader>
                 {UiFrameworks.map((framework) => {
                   const supportedComponentsCount = `${
                     Object.keys(supportedComponents[framework]).length
                   }/${Object.keys(UiComponents).length}`;
                   return (
-                    <TableHeader key={framework}>
+                    <TableHeader key={framework} sticky stickyToTop>
                       {frameworkDetails?.[framework]?.logo && (
                         <img
                           src={frameworkDetails[framework].logo}
                           alt={framework}
-                          className="h-6 w-6 inline-block mr-2"
+                          className="mr-2 inline-block h-6 w-6"
                         />
                       )}
                       {`${framework} (${supportedComponentsCount})`}
@@ -145,35 +142,42 @@ export default function Home() {
             </TableHead>
             <TableBody>
               {UiComponents.map((component) => (
-                <TableRow key={component}>
-                  <TableCell>
+                <TableRow key={component} className="group">
+                  <TableHeader
+                    sticky
+                    stickyToLeft
+                    className="bg-white text-sm font-medium group-hover:bg-gray-300"
+                  >
                     {component}
                     {UiComponentsDescription[component] && (
-                      <div className="text-xs text-gray-500 max-w-64 text-wrap">
+                      <div className="max-w-64 text-wrap text-xs font-medium tracking-normal text-gray-500">
                         {UiComponentsDescription[component]}
                       </div>
                     )}
-                  </TableCell>
-                  {UiFrameworks.map((framework) => (
-                    <TableCell key={framework}>
-                      <div
-                        className={`w-full h-full absolute top-0 left-0 z-10 ${
-                          supportedComponents[framework] &&
-                          supportedComponents[framework][component]
-                            ? "bg-green-500"
-                            : "bg-orange-500"
-                        } opacity-50`}
-                      ></div>
-                      <span className="relative z-20">
-                        {supportedComponents[framework] &&
-                        supportedComponents[framework][component] ? (
-                          <i className="fas fa-check"></i>
-                        ) : (
-                          <i className="fas fa-times"></i>
+                  </TableHeader>
+                  {UiFrameworks.map((framework) => {
+                    const supportsComponent =
+                      supportedComponents[framework]?.[component];
+                    return (
+                      <TableCell
+                        key={framework}
+                        className={cn(
+                          "text-center",
+                          supportsComponent
+                            ? "bg-green-500/50"
+                            : "bg-orange-500/50",
                         )}
-                      </span>
-                    </TableCell>
-                  ))}
+                      >
+                        <span>
+                          {supportsComponent ? (
+                            <i className="fas fa-check"></i>
+                          ) : (
+                            <i className="fas fa-times"></i>
+                          )}
+                        </span>
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               ))}
             </TableBody>
@@ -186,37 +190,43 @@ export default function Home() {
             <FrameworkDetailCard key={name} name={name} details={details} />
           ))}
         </div>
-        <div className="hidden md:block overflow-x-auto">
-          <p className="text-lg font-semibold mb-4 text-blue-900">
-            Detailed Framework Information
-          </p>
+        <p className="mb-4 text-lg font-semibold text-blue-900">
+          Detailed Framework Information
+        </p>
+        <div className="hidden max-h-[80vh] overflow-x-auto md:block">
           <Table className="w-full">
-            <TableHead isSticky={isSticky}>
+            <TableHead>
               <TableRow>
-                <TableHeader>Framework</TableHeader>
-                <TableHeader>Configuration Methods</TableHeader>
-                <TableHeader>Special Installation Requirements</TableHeader>
-                <TableHeader>License</TableHeader>
-                <TableHeader>Pricing</TableHeader>
-                <TableHeader>RTL Support</TableHeader>
-                <TableHeader>Github</TableHeader>
-                <TableHeader>Website</TableHeader>
-                <TableHeader>Docs</TableHeader>
+                {[
+                  "Framework",
+                  "Configuration Methods",
+                  "Special Installation Requirements",
+                  "License",
+                  "Pricing",
+                  "RTL Support",
+                  "Github",
+                  "Website",
+                  "Docs",
+                ].map((header, index) => (
+                  <TableHeader key={header} sticky stickyToLeft={index == 0} stickyToTop>
+                    {header}
+                  </TableHeader>
+                ))}
               </TableRow>
             </TableHead>
             <TableBody>
               {Object.entries(frameworkDetails).map(([name, details]) => (
                 <TableRow key={name}>
-                  <TableCell>
+                  <TableHeader sticky stickyToLeft>
                     <div className="flex items-center">
                       <img
                         src={details.logo}
                         alt={name}
-                        className="h-6 w-6 mr-2"
+                        className="mr-2 h-6 w-6"
                       />
                       {name}
                     </div>
-                  </TableCell>
+                  </TableHeader>
                   <TableCell>{details.configurationMethods}</TableCell>
                   <TableCell>
                     {details.specialInstallationRequirements}
