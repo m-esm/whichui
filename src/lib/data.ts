@@ -107,8 +107,8 @@ export const frameworkDetails: {
     pricing: "Free",
     RTLsupport: "Yes",
     github: "https://github.com/ant-design/ant-design",
-    website: "https://ant-design.com",
-    docs: "https://ant-design.com/docs",
+    website: "https://ant.design",
+    docs: "https://ant.design/components/overview/",
   },
 };
 
