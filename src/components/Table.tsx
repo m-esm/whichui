@@ -56,9 +56,9 @@ export const TableHeader: FC<TableHeaderProps> = (props) => {
   return (
     <th
       className={cn("px-6 py-3 text-left bg-white", props.className, {
+        "left-0": props.sticky && props.stickyToLeft,
         "sticky z-[1] bg-white": props.sticky,
         "top-0": props.sticky && props.stickyToTop,
-        "left-0": props.sticky && props.stickyToLeft,
         "z-[2]": props.sticky && props.stickyToTop && props.stickyToLeft,
       })}
     >
