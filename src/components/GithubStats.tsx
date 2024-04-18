@@ -21,18 +21,18 @@ export const GitHubStatsComponent: FC<{ framework: string; repoUrl: string }> = 
         const response = await fetch(apiUrl);
         const data = await response.json();
         setStats({
-          stars:
-            data.stargazers_count > 1000
-              ? (data.stargazers_count / 1000).toFixed(1) + "k"
-              : data.stargazers_count,
-          issues:
-            data.open_issues_count > 1000
-              ? (data.open_issues_count / 1000).toFixed(1) + "k"
-              : data.open_issues_count,
           forks:
             data.forks_count > 1000
               ? (data.forks_count / 1000).toFixed(1) + "k"
               : data.forks_count,
+          issues:
+            data.open_issues_count > 1000
+              ? (data.open_issues_count / 1000).toFixed(1) + "k"
+              : data.open_issues_count,
+          stars:
+            data.stargazers_count > 1000
+              ? (data.stargazers_count / 1000).toFixed(1) + "k"
+              : data.stargazers_count,
           watchers:
             data.watchers_count > 1000
               ? (data.watchers_count / 1000).toFixed(1) + "k"
