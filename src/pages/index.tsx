@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import { FrameworkDetailCard } from "whichui/components/FrameworkDetailCard";
 import { GitHubStatsComponent } from "whichui/components/GithubStats";
 import {
@@ -21,6 +21,8 @@ import {
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { cn } from "whichui/lib/utils";
+import { NextPageWithLayout } from "./_app";
+import MainLayout from "whichui/layouts/MainLayout";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -32,7 +34,7 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
 };
 
-export default function Home() {
+const Home: NextPageWithLayout = () => {
   useEffect(() => {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -41,46 +43,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <title>Which UI Framework Should You Use For React?</title>
-        <meta
-          name="description"
-          content="Compare different UI frameworks to find the best one for your project."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta
-          property="og:title"
-          content="Which UI Framework Should You Use?"
-        />
-        <meta
-          property="og:description"
-          content="Compare different UI frameworks to find the best one for your project."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://whichui.com/favicon.svg" />
-        <meta property="og:url" content="https://whichui.com" />
-        <meta
-          name="twitter:card"
-          content="https://whichui.com/screenshot.png"
-        />
-        <meta
-          name="twitter:title"
-          content="Which UI Framework Should You Use?"
-        />
-        <meta
-          name="twitter:description"
-          content="Compare different UI frameworks to find the best one for your project."
-        />
-        <meta
-          name="twitter:image"
-          content="https://whichui.com/screenshot.png"
-        />
-      </Head>
       <main className="min-h-screen bg-gray-200 p-4 text-blue-900 md:p-8 md:py-4">
         <section className="mb-12 bg-gray-200 py-12 text-center">
           <h1 className="mb-4 text-2xl font-bold text-blue-900 md:text-3xl">
@@ -98,14 +60,14 @@ export default function Home() {
                   src={frameworkDetails[framework].logo}
                   alt={framework}
                   className="h-20 w-20 object-contain"
-                />
+                  />
                 <span className="mt-2 text-sm font-semibold text-blue-900">
                   {framework}
 
                   <GitHubStatsComponent
                     framework={framework}
                     repoUrl={frameworkDetails[framework].github}
-                  />
+                    />
                 </span>
               </div>
             ))}
@@ -129,9 +91,9 @@ export default function Home() {
                     <TableHeader key={framework} sticky stickyToTop>
                       {frameworkDetails?.[framework]?.logo && (
                         <img
-                          src={frameworkDetails[framework].logo}
-                          alt={framework}
-                          className="mr-2 inline-block h-6 w-6"
+                        src={frameworkDetails[framework].logo}
+                        alt={framework}
+                        className="mr-2 inline-block h-6 w-6"
                         />
                       )}
                       {`${framework} (${supportedComponentsCount})`}
@@ -147,7 +109,7 @@ export default function Home() {
                     sticky
                     stickyToLeft
                     className="bg-white text-sm font-medium group-hover:bg-gray-300"
-                  >
+                    >
                     {component}
                     {UiComponentsDescription[component] && (
                       <div className="max-w-64 text-wrap text-xs font-medium tracking-normal text-gray-500">
@@ -157,16 +119,16 @@ export default function Home() {
                   </TableHeader>
                   {UiFrameworks.map((framework) => {
                     const supportsComponent =
-                      supportedComponents[framework]?.[component];
+                    supportedComponents[framework]?.[component];
                     return (
                       <TableCell
-                        key={framework}
+                      key={framework}
                         className={cn(
                           "text-center",
                           supportsComponent
-                            ? "bg-green-500/50"
+                          ? "bg-green-500/50"
                             : "bg-orange-500/50",
-                        )}
+                          )}
                       >
                         <span>
                           {supportsComponent ? (
@@ -213,7 +175,7 @@ export default function Home() {
                     sticky
                     stickyToLeft={index == 0}
                     stickyToTop
-                  >
+                    >
                     {header}
                   </TableHeader>
                 ))}
@@ -228,7 +190,7 @@ export default function Home() {
                         src={details.logo}
                         alt={name}
                         className="mr-2 h-6 w-6"
-                      />
+                        />
                       {name}
                     </div>
                   </TableHeader>
@@ -263,3 +225,9 @@ export default function Home() {
     </>
   );
 }
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>
+}
+
+export default Home
