@@ -34,7 +34,7 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
 };
 
-const Home: NextPageWithLayout = () => {
+const Home: NextPageWithLayout<{}> = () => {
   useEffect(() => {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
