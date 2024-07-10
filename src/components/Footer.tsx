@@ -39,7 +39,7 @@ const Header = () => {
         <p>Want to contribute? Visit our <a href="https://github.com/m-esm/whichui" target="_blank" className='underline font-semibold hover:scale-105'>GitHub repository</a>
           .
         </p>
-      </div>https://github.com/your-repo
+      </div>
     </div>
   )
 }
