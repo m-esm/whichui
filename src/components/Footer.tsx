@@ -3,7 +3,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center bg-gray-200 border-t-[1px] border-gray-50 px-4 md:px-12 py-3 pb-12">
+    <div className="flex flex-col md:flex-row justify-between items-center bg-gray-200 border-t-[1px] border-gray-50 px-4 md:px-12 py-3 pb-12 gap-4">
       <div className='flex flex-col gap-2 w-full'>
         <Image
           src="/favicon.svg"
