@@ -36,10 +36,10 @@ const Header = () => {
       </div>
       <div className="flex flex-col mt-auto w-full text-sm text-blue-900  ">
         <p>© 2024 Open Source App. All rights reserved.</p>
-        <p>Want to contribute? Visit our <a href="https://github.com/your-repo" target="_blank" className='underline font-semibold hover:scale-105'>GitHub repository</a>
+        <p>Want to contribute? Visit our <a href="https://github.com/m-esm/whichui" target="_blank" className='underline font-semibold hover:scale-105'>GitHub repository</a>
           .
         </p>
-      </div>
+      </div>https://github.com/your-repo
     </div>
   )
 }
