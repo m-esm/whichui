@@ -1,6 +1,6 @@
 import React from 'react' 
 import Header from 'whichui/components/Header';
-
+import Footer from 'whichui/components/Footer'
 interface IMainLayoutProps {
   children: React.ReactNode;
 }
@@ -16,7 +16,7 @@ const MainLayout = (props: IMainLayoutProps) => {
     <>
       <Header />
       <main>{children}</main>
-      <footer>footer</footer>
+      <Footer /> 
     </>
   )
 }

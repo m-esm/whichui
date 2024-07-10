@@ -43,6 +43,46 @@ const Home: NextPageWithLayout = () => {
 
   return (
     <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <title>Which UI Framework Should You Use For React?</title>
+        <meta
+          name="description"
+          content="Compare different UI frameworks to find the best one for your project."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          property="og:title"
+          content="Which UI Framework Should You Use?"
+        />
+        <meta
+          property="og:description"
+          content="Compare different UI frameworks to find the best one for your project."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://whichui.com/favicon.svg" />
+        <meta property="og:url" content="https://whichui.com" />
+        <meta
+          name="twitter:card"
+          content="https://whichui.com/screenshot.png"
+        />
+        <meta
+          name="twitter:title"
+          content="Which UI Framework Should You Use?"
+        />
+        <meta
+          name="twitter:description"
+          content="Compare different UI frameworks to find the best one for your project."
+        />
+        <meta
+          name="twitter:image"
+          content="https://whichui.com/screenshot.png"
+        />
+      </Head>
       <main className="min-h-screen bg-gray-200 p-4 text-blue-900 md:p-8 md:py-4">
         <section className="mb-12 bg-gray-200 py-12 text-center">
           <h1 className="mb-4 text-2xl font-bold text-blue-900 md:text-3xl">
