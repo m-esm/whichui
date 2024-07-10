@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import { FrameworkDetailCard } from "whichui/components/FrameworkDetailCard";
 import { GitHubStatsComponent } from "whichui/components/GithubStats";
 import {
@@ -21,6 +21,8 @@ import {
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import { cn } from "whichui/lib/utils";
+import { NextPageWithLayout } from "./_app";
+import MainLayout from "whichui/layouts/MainLayout";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -32,7 +34,7 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
 };
 
-export default function Home() {
+const Home: NextPageWithLayout<{}> = () => {
   useEffect(() => {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -98,14 +100,14 @@ export default function Home() {
                   src={frameworkDetails[framework].logo}
                   alt={framework}
                   className="h-20 w-20 object-contain"
-                />
+                  />
                 <span className="mt-2 text-sm font-semibold text-blue-900">
                   {framework}
 
                   <GitHubStatsComponent
                     framework={framework}
                     repoUrl={frameworkDetails[framework].github}
-                  />
+                    />
                 </span>
               </div>
             ))}
@@ -129,9 +131,9 @@ export default function Home() {
                     <TableHeader key={framework} sticky stickyToTop>
                       {frameworkDetails?.[framework]?.logo && (
                         <img
-                          src={frameworkDetails[framework].logo}
-                          alt={framework}
-                          className="mr-2 inline-block h-6 w-6"
+                        src={frameworkDetails[framework].logo}
+                        alt={framework}
+                        className="mr-2 inline-block h-6 w-6"
                         />
                       )}
                       {`${framework} (${supportedComponentsCount})`}
@@ -147,7 +149,7 @@ export default function Home() {
                     sticky
                     stickyToLeft
                     className="bg-white text-sm font-medium group-hover:bg-gray-300"
-                  >
+                    >
                     {component}
                     {UiComponentsDescription[component] && (
                       <div className="max-w-64 text-wrap text-xs font-medium tracking-normal text-gray-500">
@@ -157,16 +159,16 @@ export default function Home() {
                   </TableHeader>
                   {UiFrameworks.map((framework) => {
                     const supportsComponent =
-                      supportedComponents[framework]?.[component];
+                    supportedComponents[framework]?.[component];
                     return (
                       <TableCell
-                        key={framework}
+                      key={framework}
                         className={cn(
                           "text-center",
                           supportsComponent
-                            ? "bg-green-500/50"
+                          ? "bg-green-500/50"
                             : "bg-orange-500/50",
-                        )}
+                          )}
                       >
                         <span>
                           {supportsComponent ? (
@@ -213,7 +215,7 @@ export default function Home() {
                     sticky
                     stickyToLeft={index == 0}
                     stickyToTop
-                  >
+                    >
                     {header}
                   </TableHeader>
                 ))}
@@ -228,7 +230,7 @@ export default function Home() {
                         src={details.logo}
                         alt={name}
                         className="mr-2 h-6 w-6"
-                      />
+                        />
                       {name}
                     </div>
                   </TableHeader>
@@ -263,3 +265,9 @@ export default function Home() {
     </>
   );
 }
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>
+}
+
+export default Home
