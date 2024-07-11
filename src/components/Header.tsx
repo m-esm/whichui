@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
+import ThemeSwitcher from './ThemeSwitcher'
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center bg-gray-200 border-b-[1px] border-gray-50 px-12 py-3">
+    <div className="flex justify-between items-center  bg-gray-200 dark:bg-gray-600  border-b-[1px] border-gray-50 px-12 py-3">
       <div>
         <Image
           src="/favicon.svg"
@@ -28,15 +29,7 @@ const Header = () => {
             style={{ fill: "rgb(30, 58, 138)"}}
           />
         </a>
-        <div>
-          <Image
-            src="/dark.svg"
-            height={30}
-            width={30}
-            alt='light theme icon'
-            className="border-blue-900 border p-[3px] rounded-lg hover:bg-white duration-200"
-          />
-        </div>
+        <ThemeSwitcher />
       </div>
 
     </div>
