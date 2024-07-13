@@ -4,7 +4,7 @@ import ThemeSwitcher from './ThemeSwitcher'
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center  bg-gray-200 dark:bg-gray-600  border-b-[1px] border-gray-50 px-12 py-3">
+    <div className="flex justify-between items-center  bg-gray-200 dark:bg-gray-900  border-b-[1px] border-gray-50 dark:border-gray-600 px-12 py-3">
       <div>
         <Image
           src="/favicon.svg"
@@ -21,12 +21,18 @@ const Header = () => {
           rel="noopener noreferrer"
         >
           <Image 
-            src="/logos/github.svg"
+            src="/logos/githublight.svg"
             height={30}
             width={30}
             alt='github logo'
-            className="border-blue-900 border p-[1px] rounded-lg hover:bg-white duration-200"
-            style={{ fill: "rgb(30, 58, 138)"}}
+            className="hidden dark:flex dark:border-none border p-[1px] rounded-lg hover:bg-white dark:bg-gray-600 duration-200"
+          />
+          <Image 
+            src="/logos/githubdark.svg"
+            height={30}
+            width={30}
+            alt='github logo'
+            className="dark:hidden border border-black p-[1px] rounded-lg hover:bg-white  duration-200"
           />
         </a>
         <ThemeSwitcher />

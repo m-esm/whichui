@@ -43,7 +43,7 @@ const ThemeSwitcher = () => {
         height={30}
         width={30}
         alt='theme icon'
-        className={`border-blue-900 border p-[3px] rounded-lg hover:bg-white dark:hover:bg-gray-500 duration-200 ${isLight ? "light-mode-switch" : "dark-mode-switch"}`} 
+        className={`border-black dark:border-none border p-[3px] rounded-lg hover:bg-white dark:bg-gray-600 duration-200 ${isLight ? "light-mode-switch" : "dark-mode-switch"}`} 
       />
     </div>
   );
