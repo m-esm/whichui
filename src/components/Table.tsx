@@ -76,7 +76,7 @@ export const TableBody: FC<TableBodyProps> = ({ children }) => (
 export const TableCell: FC<TableCellProps> = ({ children, className }) => (
   <td
     className={cn(
-      "relative px-6 py-4 text-sm font-medium text-gray-900 ",
+      "relative px-6 py-4 text-sm font-medium text-gray-900 dark:text-gray-400 ",
       className,
     )}
   >
