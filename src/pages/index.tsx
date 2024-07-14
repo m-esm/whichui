@@ -83,12 +83,12 @@ const Home: NextPageWithLayout<{}> = () => {
           content="https://whichui.com/screenshot.png"
         />
       </Head>
-      <main className="min-h-screen bg-gray-200 p-4 text-blue-900 md:p-8 md:py-4">
-        <section className="mb-12 bg-gray-200 py-12 text-center">
-          <h1 className="mb-4 text-2xl font-bold text-blue-900 md:text-3xl">
+      <main className="min-h-screen bg-gray-200 dark:bg-gray-900 p-4 text-blue-900 dark:text-blue-600 md:p-8 md:py-4">
+        <section className="mb-12 bg-gray-200 dark:bg-gray-900 py-12 text-center">
+          <h1 className="mb-4 text-2xl font-bold text-blue-900 dark:text-blue-600 md:text-3xl">
             Which UI Framework Should You Use For React?
           </h1>
-          <p className="text-md md:text-md mx-auto mb-12 text-blue-900">
+          <p className="text-md md:text-md mx-auto mb-12 text-blue-600">
             Selecting the right UI framework can be a daunting task. This
             comparison chart will help you make an informed decision.
           </p>
@@ -99,9 +99,9 @@ const Home: NextPageWithLayout<{}> = () => {
                 <img
                   src={frameworkDetails[framework].logo}
                   alt={framework}
-                  className="h-20 w-20 object-contain"
+                  className="h-20 w-20 object-contain p-2"
                   />
-                <span className="mt-2 text-sm font-semibold text-blue-900">
+                <span className="mt-2 text-sm font-semibold text-blue-900 dark:text-blue-600">
                   {framework}
 
                   <GitHubStatsComponent
@@ -113,7 +113,7 @@ const Home: NextPageWithLayout<{}> = () => {
             ))}
           </div>
         </section>
-        <p className="mb-4 text-lg font-semibold text-blue-900">
+        <p className="mb-4 text-lg font-semibold text-blue-900 dark:text-blue-600">
           Component Support Comparison
         </p>
         <div className="max-h-[80vh] overflow-x-auto">
@@ -186,13 +186,13 @@ const Home: NextPageWithLayout<{}> = () => {
           </Table>
         </div>
 
-        <hr className="my-8" />
+        <hr className="my-8 dark:bg-gray-800" />
         <div className="block md:hidden">
           {Object.entries(frameworkDetails).map(([name, details]) => (
             <FrameworkDetailCard key={name} name={name} details={details} />
           ))}
         </div>
-        <p className="mb-4 text-lg font-semibold text-blue-900">
+        <p className="mb-4 text-lg font-semibold text-blue-900 dark:text-blue-600">
           Detailed Framework Information
         </p>
         <div className="hidden max-h-[80vh] overflow-x-auto md:block">
@@ -242,17 +242,17 @@ const Home: NextPageWithLayout<{}> = () => {
                   <TableCell>{details.pricing}</TableCell>
                   <TableCell>{details.RTLsupport}</TableCell>
                   <TableCell>
-                    <a href={details.github} className="text-green-500">
+                    <a href={details.github} className="text-green-500 dark:text-blue-400">
                       {details.github}
                     </a>
                   </TableCell>
                   <TableCell>
-                    <a href={details.website} className="text-green-500">
+                    <a href={details.website} className="text-green-500 dark:text-blue-400">
                       {details.website}
                     </a>
                   </TableCell>
                   <TableCell>
-                    <a href={details.docs} className="text-green-500">
+                    <a href={details.docs} className="text-green-500 dark:text-blue-400">
                       {details.docs}
                     </a>
                   </TableCell>

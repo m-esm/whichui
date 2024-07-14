@@ -47,9 +47,9 @@ export const GitHubStatsComponent: FC<{ framework: string; repoUrl: string }> = 
   }, [repoUrl]);
 
   return (
-    <div className="my-2 p-4 rounded-lg bg-white shadow-md border-b border-gray-200">
+    <div className="my-2 p-4 rounded-lg bg-white dark:bg-gray-700 shadow-md border-b border-gray-200 dark:border-none">
       {stats ? (
-        <ul className="list-none space-y-2">
+        <ul className="list-none space-y-2 text-blue-600 dark:text-blue-400">
           <li className="flex items-center">
             <i className="fas fa-star text-yellow-400 mr-2 w-6"></i>
             Stars: <span className="font-semibold ml-1">{stats.stars}</span>
@@ -63,7 +63,7 @@ export const GitHubStatsComponent: FC<{ framework: string; repoUrl: string }> = 
             Forks: <span className="font-semibold ml-1">{stats.forks}</span>
           </li>
           <li className="flex items-center">
-            <i className="fas fa-eye text-blue-500 mr-2 w-6"></i>
+            <i className="fas fa-eye text-blue-500 dark:text-blue-300 mr-2 w-6"></i>
             Watchers:{" "}
             <span className="font-semibold ml-1">{stats.watchers}</span>
           </li>
@@ -79,7 +79,7 @@ export const GitHubStatsComponent: FC<{ framework: string; repoUrl: string }> = 
             </a>
           </li>
           <li className="flex items-center">
-            <i className="fas fa-globe text-blue-500 mr-2 w-6"></i>
+            <i className="fas fa-globe text-blue-500 dark:text-blue-300 mr-2 w-6"></i>
             <a
               href={frameworkDetails[framework].website}
               className="font-semibold ml-1"
