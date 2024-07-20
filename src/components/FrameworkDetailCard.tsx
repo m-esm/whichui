@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { frameworkDetails } from "whichui/lib/data";
 
 export const FrameworkDetailCard = ({
@@ -20,7 +21,7 @@ export const FrameworkDetailCard = ({
     <div className="flex items-center justify-between mb-4">
       <h3 className="text-2xl font-bold text-blue-600">{name}</h3>
       {frameworkDetails?.[name]?.logo && (
-        <img src={frameworkDetails[name].logo} alt={name} className="h-8 w-8" />
+        <Image src={frameworkDetails[name].logo} alt={name} height={32} width={32} />
       )}
     </div>
     <p className="text-sm text-gray-600">
