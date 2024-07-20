@@ -23,6 +23,7 @@ import { initializeApp } from "firebase/app";
 import { cn } from "whichui/lib/utils";
 import { NextPageWithLayout } from "./_app";
 import MainLayout from "whichui/layouts/MainLayout";
+import Image from "next/image";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -96,10 +97,12 @@ const Home: NextPageWithLayout<{}> = () => {
           <div className="flex flex-wrap items-center justify-center gap-8">
             {UiFrameworks.map((framework) => (
               <div key={framework} className="flex flex-col items-center">
-                <img
+                <Image
                   src={frameworkDetails[framework].logo}
                   alt={framework}
-                  className="h-20 w-20 object-contain p-2"
+                  className="object-contain p-2"
+                  height={80}
+                  width={80}
                   />
                 <span className="mt-2 text-sm font-semibold text-blue-900 dark:text-blue-600">
                   {framework}
@@ -130,10 +133,12 @@ const Home: NextPageWithLayout<{}> = () => {
                   return (
                     <TableHeader key={framework} sticky stickyToTop>
                       {frameworkDetails?.[framework]?.logo && (
-                        <img
+                        <Image
                         src={frameworkDetails[framework].logo}
                         alt={framework}
-                        className="mr-2 inline-block h-6 w-6"
+                        className="mr-2 inline-block "
+                        height={24}
+                        width={24}
                         />
                       )}
                       {`${framework} (${supportedComponentsCount})`}
@@ -226,10 +231,12 @@ const Home: NextPageWithLayout<{}> = () => {
                 <TableRow key={name}>
                   <TableHeader sticky stickyToLeft>
                     <div className="flex items-center">
-                      <img
+                      <Image
                         src={details.logo}
                         alt={name}
-                        className="mr-2 h-6 w-6"
+                        className="mr-2"
+                        width={24}
+                        height={24}
                         />
                       {name}
                     </div>
