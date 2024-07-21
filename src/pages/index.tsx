@@ -268,6 +268,18 @@ const Home: NextPageWithLayout<{}> = () => {
             </TableBody>
           </Table>
         </div>
+        {/* test container */}
+        <div>
+          <h1>Main App</h1>
+          <h2>MUI App</h2>
+          <iframe src="/mui/index.html#/button" width="600" height="400" title="MUI App"></iframe>
+          <iframe src="/mui/index.html#/input" width="600" height="400" title="MUI App"></iframe>
+          
+          <h2>Ant Design App</h2>
+          <iframe src="/ant/index.html/#/button" width="600" height="400" title="Ant Design App"></iframe>
+          <iframe src="/ant/index.html/#/input" width="600" height="400" title="Ant Design App"></iframe>
+        </div>
+        {/* test container */}
       </main>
     </>
   );
